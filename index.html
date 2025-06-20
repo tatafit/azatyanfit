@@ -214,11 +214,17 @@
     <h2>ProAss 2.0</h2>
     <p style="font-size: 14px;">Тренируйся со мной и измени своё тело за <strong>8 недель</strong> — без стресса и жёстких ограничений</p>
     <h3>Кому подойдёт?</h3>
-    <div class="carousel">
-      <div class="card">Начинающим</div>
-      <div class="card">После родов</div>
-      <div class="card">Для занятых</div>
-      <div class="card">Для продвинутых</div>
+    <div class="carousel-wrapper">
+      <div class="carousel" id="target-carousel">
+        <div class="card">Начинающим</div>
+        <div class="card">После родов</div>
+        <div class="card">Для занятых</div>
+        <div class="card">Для продвинутых</div>
+      </div>
+      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 10px;">
+        <button class="carousel-button" onclick="scrollTargetCarousel(-1)">←</button>
+        <button class="carousel-button" onclick="scrollTargetCarousel(1)">→</button>
+      </div>
     </div>
   </div>
 </section>
@@ -314,10 +320,13 @@
   function scrollCarousel(direction) {
     const carousel = document.getElementById('tariff-carousel');
     const scrollAmount = carousel.offsetWidth * 0.6;
-    carousel.scrollBy({
-      left: direction * scrollAmount,
-      behavior: 'smooth'
-    });
+    carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+  }
+
+  function scrollTargetCarousel(direction) {
+    const carousel = document.getElementById('target-carousel');
+    const scrollAmount = carousel.offsetWidth * 0.6;
+    carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
   }
 </script>
 
