@@ -90,6 +90,9 @@
       50% { transform: scale(1.05); opacity: 0.9; }
       100% { transform: scale(1); opacity: 1; }
     }
+    .carousel-wrapper {
+      position: relative;
+    }
     .carousel {
       display: flex;
       overflow-x: auto;
@@ -101,6 +104,20 @@
     .carousel::-webkit-scrollbar {
       display: none;
     }
+    .carousel-button {
+      background: linear-gradient(45deg, #fda085, #f6d365);
+      border: none;
+      border-radius: 50px;
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .carousel-button:hover {
+      transform: scale(1.1);
+    }
     .card {
       flex: 0 0 45%;
       background: white;
@@ -110,14 +127,27 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       font-size: 14px;
       cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.02);
     }
     .card h3 {
-      background: #fda085;
+      background: linear-gradient(45deg, #fda085, #f6d365);
       color: white;
       border-radius: 6px;
       padding: 6px;
       margin-bottom: 6px;
       font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card h3 .arrow {
+      transition: transform 0.3s;
+    }
+    .card.open h3 .arrow {
+      transform: rotate(180deg);
     }
     .price-tag {
       background: #ffe3ec;
@@ -138,22 +168,7 @@
       margin-top: 5px;
     }
     .card.open .accordion-desc {
-      max-height: 500px;
-    }
-    .accordion-link {
-      display: inline-block;
-      font-size: 14px;
-      color: #d03b55;
-      background: transparent;
-      border: none;
-      margin-top: 10px;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    .panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
+      max-height: 1000px;
     }
     .footer {
       padding: 15px;
@@ -173,6 +188,11 @@
       color: #333;
       font-size: 12px;
       margin-top: 8px;
+    }
+    @media (max-width: 600px) {
+      .card {
+        flex: 0 0 100%;
+      }
     }
   </style>
 </head>
@@ -207,49 +227,54 @@
   <div class="section-bg" style="background-image: url('bg3.JPG');"></div>
   <div class="blur">
     <h2>Тарифы</h2>
-    <p style="font-size: 13px; color: #555;">Жми на каждый тариф, чтобы узнать подробно</p>
-    <div class="carousel">
-      <div class="card" onclick="this.classList.toggle('open')">
-        <h3>Базовый</h3>
-        <div class="accordion-desc">
-          <p>• Тренировочная программа на 2 месяца<br>
-             • Растяжка<br>
-             • Утренний комплекс для красивой осанки<br>
-             • Упражнения на тонкую талию<br>
-             • Вкусные и простые рецепты блюд<br>
-             • Лекция по питанию</p>
+    <div class="carousel-wrapper">
+      <div class="carousel" id="tariff-carousel">
+        <div class="card" onclick="this.classList.toggle('open')">
+          <h3>Базовый <span class="arrow">▼</span></h3>
+          <div class="accordion-desc">
+            <p>• Тренировочная программа на 2 месяца<br>
+               • Растяжка<br>
+               • Утренний комплекс для красивой осанки<br>
+               • Упражнения на тонкую талию<br>
+               • Вкусные и простые рецепты блюд<br>
+               • Лекция по питанию</p>
+          </div>
+          <span class="price-tag">3490 ₽</span>
         </div>
-        <span class="price-tag">3490 ₽</span>
+        <div class="card" onclick="this.classList.toggle('open')">
+          <h3>Индивидуальный <span class="arrow">▼</span></h3>
+          <div class="accordion-desc">
+            <p>• Тренировочная программа на 2 месяца<br>
+               • Растяжка<br>
+               • Утренний комплекс для красивой осанки<br>
+               • Упражнения на тонкую талию<br>
+               • Вкусные и простые рецепты блюд<br>
+               • Лекция по питанию<br>
+               <strong>+ Обратная связь по технике выполнения упражнений — 3 недели</strong></p>
+          </div>
+          <span class="price-tag">5390 ₽</span>
+        </div>
+        <div class="card" onclick="this.classList.toggle('open')">
+          <h3>Максимум <span class="arrow">▼</span></h3>
+          <div class="accordion-desc">
+            <p>• Тренировочная программа на 2 месяца<br>
+               • Растяжка<br>
+               • Утренний комплекс для красивой осанки<br>
+               • Упражнения на тонкую талию<br>
+               • Вкусные и простые рецепты блюд<br>
+               • Лекция по питанию<br>
+               <strong>+ Обратная связь по технике выполнения упражнений — 3 недели</strong><br>
+               <strong>+ Онлайн-консультация по питанию</strong><br>
+               <strong>+ Разбор продуктовой корзины и рекомендации по рациону</strong><br>
+               <strong>+ Обратная связь по питанию и тренировкам — 3 недели</strong><br>
+               <strong>+ Проверка отчётов по питанию</strong></p>
+          </div>
+          <span class="price-tag">9690 ₽</span>
+        </div>
       </div>
-      <div class="card" onclick="this.classList.toggle('open')">
-        <h3>Индивидуальный</h3>
-        <div class="accordion-desc">
-          <p>• Тренировочная программа на 2 месяца<br>
-             • Растяжка<br>
-             • Утренний комплекс для красивой осанки<br>
-             • Упражнения на тонкую талию<br>
-             • Вкусные и простые рецепты блюд<br>
-             • Лекция по питанию<br>
-             <strong>+ Обратная связь по технике выполнения упражнений — 3 недели</strong></p>
-        </div>
-        <span class="price-tag">5390 ₽</span>
-      </div>
-      <div class="card" onclick="this.classList.toggle('open')">
-        <h3>Максимум</h3>
-        <div class="accordion-desc">
-          <p>• Тренировочная программа на 2 месяца<br>
-             • Растяжка<br>
-             • Утренний комплекс для красивой осанки<br>
-             • Упражнения на тонкую талию<br>
-             • Вкусные и простые рецепты блюд<br>
-             • Лекция по питанию<br>
-             <strong>+ Обратная связь по технике выполнения упражнений — 3 недели</strong><br>
-             <strong>+ Онлайн-консультация по питанию</strong><br>
-             <strong>+ Разбор продуктовой корзины и рекомендации по рациону</strong><br>
-             <strong>+ Обратная связь по питанию и тренировкам — 3 недели</strong><br>
-             <strong>+ Проверка отчётов по питанию</strong></p>
-        </div>
-        <span class="price-tag">9690 ₽</span>
+      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 10px;">
+        <button class="carousel-button" onclick="scrollCarousel(-1)">←</button>
+        <button class="carousel-button" onclick="scrollCarousel(1)">→</button>
       </div>
     </div>
     <a class="button" href="https://t.me/azatyanfit">Приобрести тариф</a>
@@ -284,6 +309,17 @@
   <span>© Все права защищены</span>
   <a href="#top" class="to-top">Наверх ↑</a>
 </footer>
+
+<script>
+  function scrollCarousel(direction) {
+    const carousel = document.getElementById('tariff-carousel');
+    const scrollAmount = carousel.offsetWidth * 0.6;
+    carousel.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+</script>
 
 </body>
 </html>
